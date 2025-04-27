@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Expense Tracker - Expenses{% endblock %}
+
+{% block content %}
+    <h1>All Expenses</h1>
+
+    <div style="margin-bottom: 1rem;">
+        <a href="{{ url_for('list_expenses') }}" class="filter-btn">(All)</a>
+        <a href="{{ url_for('list_expenses', sort='amount') }}" class="filter-btn">Sort by Amount</a>
+        <a href="{{ url_for('list_expenses', sort='date') }}" class="filter-btn">Sort by Date</a>
+        <a href="{{ url_for('list_expenses', sort='category') }}" class="filter-btn">Sort by Category</a>
+    </div>
+
+    <div style="margin-bottom: 1rem;">
+        <a class="filter-btn" href="{{ url_for('add_expense') }}">Add New Expense</a>
+    </div>
+
+    {% if expenses %}
+    <table>
+        <thead>
+            <tr>
+                <th>Amount</th>
+                <th>Category</th>
+                <th>Date</th>
+                <th>Note</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for expense in expenses %}
+            <tr>
+                <td>${{ '%.2f' | format(expense.amount) }}</td>
+                <td>{{ expense.category }}</td>
+                <td>{{ expense.date.strftime('%Y-%m-%d') }}</td>
+                <td>{{ expense.note }}</td>
+                <td>
+                    <a href="{{ url_for('expense_detail', id=expense.id) }}" class="btn">Edit</a>
+                    <form action="{{ url_for('delete_expense', id=expense.id) }}" method="post" style="display:inline;">
+                        <button class="btn" type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>No expenses found.</p>
+    {% endif %}
+{% endblock %}
