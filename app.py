@@ -77,7 +77,7 @@ def confirm_delete(expense_id):
 
     # this if statment checks that the expense actally exists 
     if not expense:
-        return render_template("error", message= "No expence matching the ID")
+        return render_template("error.html", message= "No expence matching the ID")
     
     return render_template("confirm_delete.html", expense=expense)
 
@@ -91,7 +91,7 @@ def delete_expense(expense_id):
 
     # this if statment checks that the expense actally exists 
     if not expense:
-        return render_template("error", message= "No expence matching the ID")
+        return render_template("error.html", message= "No expence matching the ID")
     
     # this deletes the chosen expense and commits the changes 
     db.session.delete(expense)
