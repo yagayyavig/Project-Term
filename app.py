@@ -68,7 +68,36 @@ def add_expense():
 
 # Edit Expense
 
-# Delete Expense
+
+# Take you to confirm delete (this dosnt delete anything, just takes you to the confim page)
+@app.route("/expenses/<int:expense_id>/deleteconfirm")
+def confirm_delete(expense_id):
+    stmt = select(Expense).where(Expense.id == expense_id)
+    expense = db.session.execute(stmt).scalars().first()
+
+    # this if statment checks that the expense actally exists 
+    if not expense:
+        return render_template("error", message= "No expence matching the ID")
+    
+    return render_template("confirm_delete.html", expense=expense)
+
+
+# Actally Delete Expense
+@app.route("/expenses/<int:expense_id>/delete", methods=["POST"])
+# choose what expense to delete based on unique id
+def delete_expense(expense_id):
+    stmt = select(Expense).where(Expense.id == expense_id)
+    expense = db.session.execute(stmt).scalars().first()
+
+    # this if statment checks that the expense actally exists 
+    if not expense:
+        return render_template("error", message= "No expence matching the ID")
+    
+    # this deletes the chosen expense and commits the changes 
+    db.session.delete(expense)
+    db.session.commit()
+    # return back to expeses page after deletion
+    return redirect(url_for('list_expenses'))
 
 if __name__ == "__main__":
     app.run(debug=True, port=8002)

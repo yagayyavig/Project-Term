@@ -35,10 +35,7 @@
                 <td>{{ expense.date.strftime('%Y-%m-%d') }}</td>
                 <td>{{ expense.note }}</td>
                 <td>
-                    <a href="{{ url_for('expense_detail', id=expense.id) }}" class="btn">Edit</a>
-                    <form action="{{ url_for('delete_expense', id=expense.id) }}" method="post" style="display:inline;">
-                        <button class="btn" type="submit">Delete</button>
-                    </form>
+                    <a href="{{ url_for('confirm_delete', expense_id=expense.id) }}" class="btn">Delete</a>
                 </td>
             </tr>
             {% endfor %}
