@@ -42,26 +42,28 @@ def list_expenses():
     return render_template("expenses.html", expenses=expenses)
 
 # Add Expense
-@app.route("/expenses/add", methods=["GET", "POST"])
+@app.route("/expenses/add", methods=["GET"])
 def add_expense():
-    if request.method == "POST":
-        amount = float(request.form["amount"])
-        category = request.form["category"]
-        date = datetime.strptime(request.form["date"], "%Y-%m-%d").date()
-        note = request.form["note"]
-
-        today = datetime.today().date()
-
-        if date > today:
-            return render_template("error.html", message="Cannot add expense for a future date!")
-
-        new_expense = Expense(amount=amount, category=category, date=date, note=note)
-        db.session.add(new_expense)
-        db.session.commit()
-        return redirect(url_for("list_expenses"))
-    
     today = datetime.today().strftime('%Y-%m-%d')
     return render_template("add_expense.html", today=today)
+
+@app.route("/expenses/add", methods=["POST"])
+def submit_new_expense():
+    amount = float(request.form["amount"])
+    category = request.form["category"]
+    date = datetime.strptime(request.form["date"], "%Y-%m-%d").date()
+    note = request.form["note"]
+
+    today = datetime.today().date()
+
+    if date > today:
+        return render_template("error.html", message="Cannot add expense for a future date!")
+
+    new_expense = Expense(amount=amount, category=category, date=date, note=note)
+    db.session.add(new_expense)
+    db.session.commit()
+    return redirect(url_for("list_expenses"))
+
 
 # Shows the "Edit" Form
 @app.route("/expenses/edit/<int:expense_id>", methods=["GET"])
