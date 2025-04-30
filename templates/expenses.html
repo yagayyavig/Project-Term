@@ -3,17 +3,28 @@
 {% block title %}Expense Tracker - Expenses{% endblock %}
 
 {% block content %}
-    <h1>All Expenses</h1>
+<link rel="stylesheet" href="{{ url_for('static', filename='e.css') }}">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet"/>
+<div class="top-banner" id="banner-text">
+    VAULT CONTENTS — MONITOR YOUR SPENDING ACTIVITY
+</div>
+<div class="back-video-wrapper">
+    <video autoplay muted loop class="back-video">
+        <source src="{{ url_for('static', filename='e.mp4') }}" type="video/mp4">
+    </video>
+</div>
+<div class="center">
+    <h1>The Ledger</h1>
 
-    <div style="margin-bottom: 1rem;">
+    <div class="button-group">
         <a href="{{ url_for('list_expenses') }}" class="filter-btn">(All)</a>
         <a href="{{ url_for('list_expenses', sort='amount') }}" class="filter-btn">Sort by Amount</a>
         <a href="{{ url_for('list_expenses', sort='date') }}" class="filter-btn">Sort by Date</a>
         <a href="{{ url_for('list_expenses', sort='category') }}" class="filter-btn">Sort by Category</a>
     </div>
 
-    <div style="margin-bottom: 1rem;">
-        <a class="filter-btn" href="{{ url_for('add_expense') }}">Add New Expense</a>
+    <div class="button-group">
+        <a class="filter-btn" href="{{ url_for('add_expense') }}">Add New Entry</a>
     </div>
 
     {% if expenses %}
@@ -43,6 +54,23 @@
         </tbody>
     </table>
     {% else %}
-        <p>No expenses found.</p>
+    <p>No expenses found.</p>
     {% endif %}
+</div>
+
+<script>
+    const messages = [
+        "VAULT CONTENTS — MONITOR YOUR SPENDING ACTIVITY",
+        "REVIEW YOUR TRANSACTION HISTORY",
+        "EDIT, DELETE, OR SORT WITH EASE",
+        "KEEP TRACK. STAY AHEAD."
+    ];
+    let index = 0;
+    const banner = document.getElementById("banner-text");
+
+    setInterval(() => {
+        index = (index + 1) % messages.length;
+        banner.textContent = messages[index];
+    }, 4000);
+</script>
 {% endblock %}

@@ -1,0 +1,129 @@
+.back-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    object-position: center;
+  }
+  
+  body {
+    margin: 0;
+    padding: 4rem 1rem 2rem;
+    background-color: black;
+    color: white;
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+  }
+  
+  .top-banner {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 0.75rem;
+    font-size: 0.9rem;
+    letter-spacing: 0.12em;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Headings */
+  h1 {
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  /* Center content box */
+  .center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 6rem;
+    padding: 1rem;
+  }
+  
+  /* Button group */
+  .button-group {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  /* Buttons */
+  .filter-btn, .btn {
+    padding: 0.6rem 1.4rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(6px);
+  }
+  
+  .filter-btn:hover, .btn:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    color: black;
+    border-color: white;
+    transform: scale(1.05);
+  }
+  
+  /* Table */
+  table {
+    width: 100%;
+    max-width: 900px;
+    margin: 2.5rem auto;
+    border-collapse: collapse;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  
+  th, td {
+    padding: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  }
+  
+  th {
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+  
+  td {
+    font-size: 0.95rem;
+  }
+  
+  .back-video-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: -2; 
+  }
+  
+  .back-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: blur(5px); 
+    transform: scale(1.05); 
+  }

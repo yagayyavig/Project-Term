@@ -3,13 +3,38 @@
 {% block title %}Welcome{% endblock %}
 
 {% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<div>
+    <video autoplay loop muted plays-inline class="back-video">
+        <source src="{{ url_for('static', filename='video.mp4') }}" type="video/mp4">
+    </video>
+    <div class="top-banner" id="banner-text">
+        THE VAULT IS NOW OPEN. TRACK YOUR SPENDING IN STYLE.
+    </div>
+
     <div class="center-box">
         <div class="card">
-            <h1 class="welcome-text">Welcome to Your Expense Tracker</h1>
-            <p>Browse our amazing products and categories!</p>
+            <h1 class="welcome-text">DECODE YOUR SPENDING</h1>
+            <p>ENTER THE VAULT AND VIEW YOUR EXPENSES HERE</p>
             <a href="{{ url_for('list_expenses') }}">
-                <button>View Expenses</button>
+                <button>ENTER</button>
             </a>
         </div>
     </div>
+</div>
+
+<script>
+    const messages = [
+        "THE VAULT IS NOW OPEN. TRACK YOUR SPENDING IN STYLE.",
+        "SPEND SMART. LIVE BOLD.",
+        "KNOW WHERE EVERY DOLLAR GOES."
+    ];
+    let index = 0;
+    const banner = document.getElementById("banner-text");
+
+    setInterval(() => {
+        index = (index + 1) % messages.length;
+        banner.textContent = messages[index];
+    }, 4000);
+</script>
 {% endblock %}
