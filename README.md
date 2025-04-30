@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+# Project Term - Budget Tracker
+## Yagayya Vig, Shrey Dhand, Luis Morin, Samantha Lum & Nick Fiebelkorn
+
+ 
+=======
 # Project Term - Expense Tracker
 
 ## Team Members
@@ -80,3 +86,4 @@ pip install flask_SQLAlchemy
 # Run the app
 python app.py
 ```
+>>>>>>> 2736a0fc8906eed4047a15f8a119acc5341330f9

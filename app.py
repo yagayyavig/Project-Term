@@ -42,32 +42,66 @@ def list_expenses():
     return render_template("expenses.html", expenses=expenses)
 
 # Add Expense
-@app.route("/expenses/add", methods=["GET", "POST"])
+@app.route("/expenses/add", methods=["GET"])
 def add_expense():
-    if request.method == "POST":
-        amount = float(request.form["amount"])
-        category = request.form["category"]
-        date = datetime.strptime(request.form["date"], "%Y-%m-%d").date()
-        note = request.form["note"]
-
-        today = datetime.today().date()
-
-        if date > today:
-            return render_template("error.html", message="Cannot add expense for a future date!")
-
-        new_expense = Expense(amount=amount, category=category, date=date, note=note)
-        db.session.add(new_expense)
-        db.session.commit()
-        return redirect(url_for("list_expenses"))
-    
     today = datetime.today().strftime('%Y-%m-%d')
     return render_template("add_expense.html", today=today)
 
+@app.route("/expenses/add", methods=["POST"])
+def submit_new_expense():
+    amount = float(request.form["amount"])
+    category = request.form["category"]
+    date = datetime.strptime(request.form["date"], "%Y-%m-%d").date()
+    note = request.form["note"]
 
-# Need to do 
+    today = datetime.today().date()
+
+    if date > today:
+        return render_template("error.html", message="Cannot add expense for a future date!")
+
+    new_expense = Expense(amount=amount, category=category, date=date, note=note)
+    db.session.add(new_expense)
+    db.session.commit()
+    return redirect(url_for("list_expenses"))
+
+
+# Shows the "Edit" Form
+@app.route("/expenses/edit/<int:expense_id>", methods=["GET"])
+def edit_form(expense_id):
+    stmt = select(Expense).where(Expense.id == expense_id)
+    expense = db.session.execute(stmt).scalars().first()
+
+    if not expense:
+        return render_template("error.html", message="No expense matching the ID")
+    
+    today = datetime.today().strftime("%Y-%m-%d")
+    return render_template("edit_expense.html", expense=expense, today=today)
 
 # Edit Expense
+@app.route("/expenses/edit/<int:expense_id>", methods=["POST"])
+def edit_expense(expense_id):
+    stmt = select(Expense).where(Expense.id == expense_id)
+    expense = db.session.execute(stmt).scalars().first()
 
+    if not expense:
+        return render_template("error.html", message="No expense matching the ID")
+    
+    amount = float(request.form["amount"])
+    category = request.form["category"]
+    date = datetime.strptime(request.form["date"], "%Y-%m-%d").date()
+    note = request.form["note"]
+    
+    today = datetime.today().date()
+    if date > today:
+        return render_template("error.html", message="Cannot set a future date for the expense")
+    
+    expense.amount = amount
+    expense.category = category
+    expense.date = date
+    expense.note = note
+
+    db.session.commit()
+    return redirect(url_for("list_expenses"))
 
 # Take you to confirm delete (this dosnt delete anything, just takes you to the confim page)
 @app.route("/expenses/<int:expense_id>/deleteconfirm")
@@ -77,7 +111,7 @@ def confirm_delete(expense_id):
 
     # this if statment checks that the expense actally exists 
     if not expense:
-        return render_template("error", message= "No expence matching the ID")
+        return render_template("error.html", message= "No expence matching the ID")
     
     return render_template("confirm_delete.html", expense=expense)
 
@@ -91,7 +125,7 @@ def delete_expense(expense_id):
 
     # this if statment checks that the expense actally exists 
     if not expense:
-        return render_template("error", message= "No expence matching the ID")
+        return render_template("error.html", message= "No expence matching the ID")
     
     # this deletes the chosen expense and commits the changes 
     db.session.delete(expense)
