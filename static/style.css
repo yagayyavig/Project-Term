@@ -1,36 +1,45 @@
-.back-video {
+/* Background Video */
+#bg-video {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: -1;
-  width: 100vw;
-  height: 100vh;
+  min-width: 100vw;
+  min-height: 100vh;
   object-fit: cover;
-  object-position: center;
+  z-index: -1;
 }
 
+/* Content Layer Above Video */
+.content-wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+/* General Page Layout */
 body {
   margin: 0;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  padding: 0;
   font-family: 'Playfair Display', serif;
   color: white;
   text-align: center;
-  padding: 0 1rem;
   background-color: black;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
+/* Centered Box (use only if you're centering a specific section) */
 .center-box {
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.5);
   padding: 2rem;
   border-radius: 12px;
   max-width: 500px;
   width: 100%;
-  height:100%;
+  margin: auto;
+  backdrop-filter: blur(4px);
 }
 
+/* Buttons */
 button {
   padding: 0.6rem 1.2rem;
   margin: 5px;
@@ -45,10 +54,10 @@ button {
 }
 
 button:hover {
-
   background-color: #ffffff;
 }
 
+/* Typography */
 p {
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -56,9 +65,10 @@ p {
 
 h1 {
   letter-spacing: 3px;
-  padding:10%;
+  margin: 2rem 0;
 }
 
+/* Top Notification Banner */
 .top-banner {
   position: fixed;
   top: 0;
@@ -71,6 +81,5 @@ h1 {
   font-size: 0.9rem;
   letter-spacing: 0.1em;
   font-family: 'Playfair Display', serif;
-  z-index: 9999;
+  z-index: 1000;
 }
-
