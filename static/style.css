@@ -17,6 +17,56 @@
 
 /* General Page Layout */
 body {
+<<<<<<< HEAD
+    font-family: 'Segoe UI', 'Roboto', 'Helvetica', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f5f7fa;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+div.card {
+  color: red;
+}
+
+h1 {
+  color: red
+}
+
+form {
+  color: red;
+}
+
+label {
+  color: red
+}
+
+input {
+  color: red;
+}
+
+button {
+  color: red
+}
+
+.btn {
+  color: red;
+}
+
+nav a{
+  color: red;
+  display: flex;
+  flex-direction: row;
+}
+
+footer {
+  color: red;
+}
+=======
   margin: 0;
   padding: 0;
   font-family: 'Playfair Display', serif;
@@ -83,3 +133,8 @@ h1 {
   font-family: 'Playfair Display', serif;
   z-index: 1000;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> a38708dfee9dcb53ee979c73d372b03dbd1f7b76
+>>>>>>> 769fe64012a511734afa99eb48e36455814a699f
