@@ -10,4 +10,41 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
   }
-  
+
+div.card {
+  color: red;
+}
+
+h1 {
+  color: red
+}
+
+form {
+  color: red;
+}
+
+label {
+  color: red
+}
+
+input {
+  color: red;
+}
+
+button {
+  color: red
+}
+
+.btn {
+  color: red;
+}
+
+nav a{
+  color: red;
+  display: flex;
+  flex-direction: row;
+}
+
+footer {
+  color: red;
+}
