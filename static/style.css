@@ -11,6 +11,7 @@
 }
 
 body {
+<<<<<<< HEAD
   margin: 0;
   height: 100vh;
   display: flex;
@@ -75,3 +76,200 @@ h1{
 }
 
 
+=======
+  font-family: 'Segoe UI', 'Roboto', 'Helvetica', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f5f7fa;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Header */
+header {
+  background: #2c3e50;
+  color: white;
+  padding: 1rem 2rem;
+  text-align: center;
+  font-size: 1.75rem;
+  font-weight: 600;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+}
+
+/* Navigation */
+nav {
+  background: #34495e;
+  display: flex;
+  justify-content: center;
+  padding: 1.2rem;
+  gap: 4rem;
+  flex-wrap: wrap;
+  backdrop-filter: blur(5px);
+}
+
+
+nav a {
+  color: #ecf0f1;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  border-radius: 5px;
+  padding: 10px 20px; /* <-- Add padding to create a proper box */
+  background: transparent;
+  transition: all 0.2s ease-in-out;
+  display: inline-block; /* <-- Needed to treat it like a box */
+}
+
+nav a:hover {
+  color: #ffffff;
+  background: #1a5276;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transform: scale(1.1); /* Grow the entire box */
+}
+
+
+
+
+/* Main */
+main {
+  flex-grow: 1;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Cards */
+.card {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+  max-width: 1200px;
+  width: 100%;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 12px 16px;
+  text-align: left;
+}
+
+th {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
+tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+tr:hover {
+  background: #eef2f7;
+}
+
+/* Buttons */
+button, .filter-btn, .sort-btn, a.btn {
+  background: #3498db;
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.3s ease;
+}
+
+button:hover, .filter-btn:hover, .sort-btn:hover, a.btn:hover {
+  background: #2980b9;
+}
+
+/* Form Elements */
+input[type="text"],
+input[type="number"],
+input[type="date"],
+textarea,
+select {
+  width: 92%;
+  padding: 10px 14px;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fafafa;
+  font-size: 1rem;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+textarea:focus,
+select:focus {
+  border-color: #3498db;
+  outline: none;
+  background: white;
+}
+
+/* Back Button */
+.back-btn {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  text-decoration: none;
+  color: white;
+  width: auto;
+  height: auto;
+  padding: 10px 16px;
+  background: #3498db;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  transition: background 0.3s ease;
+  z-index: 10;
+}
+
+.back-btn:hover {
+  background: #2980b9;
+}
+
+/* Footer */
+footer {
+  background: #2c3e50;
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #bdc3c7;
+  margin-top: auto;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  nav ul {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  main {
+    padding: 1rem;
+  }
+
+  table {
+    font-size: 0.9rem;
+  }
+}
+>>>>>>> fb6fdcc641202705d04ed5637558dc561b627214

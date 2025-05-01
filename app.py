@@ -31,7 +31,9 @@ def list_expenses():
     sort = request.args.get("sort")
     stmt = db.select(Expense)
 
-    if sort == "amount":
+    if sort =="id":
+        stmt= stmt.order_by(Expense.id)
+    elif sort == "amount":
         stmt = stmt.order_by(Expense.amount)
     elif sort == "date":
         stmt = stmt.order_by(Expense.date)
