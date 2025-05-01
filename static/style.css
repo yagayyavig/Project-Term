@@ -27,7 +27,7 @@ body {
 
 header {
   background-color: #00000055;
-  padding: 2.5rem 4rem;
+  padding: 1.5rem 3rem;
   display: flex;
   justify-content: center;
   gap: 2.5rem;
@@ -161,7 +161,7 @@ tr:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 70vh;
+  height: 82vh;
   flex-direction: column;
   text-align: center;
   width: 95%;
@@ -215,6 +215,7 @@ header nav {
   justify-content: center;
   gap: 2rem;
   flex-wrap: wrap;
+
 }
 
 header nav a {
