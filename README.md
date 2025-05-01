@@ -1,9 +1,8 @@
-<<<<<<< HEAD
 # Project Term - Budget Tracker
 ## Yagayya Vig, Shrey Dhand, Luis Morin, Samantha Lum & Nick Fiebelkorn
 
  
-=======
+
 # Project Term - Expense Tracker
 
 ## Team Members
