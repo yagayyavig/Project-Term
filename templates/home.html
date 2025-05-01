@@ -3,13 +3,11 @@
 {% block title %}Welcome{% endblock %}
 
 {% block content %}
-    <div class="center-box">
-        <div class="card">
-            <h1 class="welcome-text">Welcome to Your Expense Tracker</h1>
-            <p>Browse our amazing products and categories!</p>
-            <a href="{{ url_for('list_expenses') }}">
-                <button>View Expenses</button>
-            </a>
-        </div>
+<div class="center-box">
+    <div class="card" style="max-width: 600px; text-align: center;">
+        <h1 class="welcome-text">Welcome to Your Expense Tracker</h1>
+        <p>Manage your expenses efficiently and view your spending history.</p>
+        <a href="{{ url_for('list_expenses') }}" class="btn" style="margin-top: 1rem; font-size: 19px;">View Expenses</a>
     </div>
+</div>
 {% endblock %}
