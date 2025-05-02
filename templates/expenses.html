@@ -18,6 +18,7 @@
 
     <div class="button-group">
         <a href="{{ url_for('list_expenses') }}" class="filter-btn">(All)</a>
+        <a href="{{ url_for('list_expenses', sort='id' )}}" class="filter-btn">Sort by Id</a>
         <a href="{{ url_for('list_expenses', sort='amount') }}" class="filter-btn">Sort by Amount</a>
         <a href="{{ url_for('list_expenses', sort='date') }}" class="filter-btn">Sort by Date</a>
         <a href="{{ url_for('list_expenses', sort='category') }}" class="filter-btn">Sort by Category</a>
@@ -31,6 +32,7 @@
     <table>
         <thead>
             <tr>
+                <th> Id </th>
                 <th>Amount</th>
                 <th>Category</th>
                 <th>Date</th>
@@ -41,6 +43,7 @@
         <tbody>
             {% for expense in expenses %}
             <tr>
+                <td>{{expense.id}} </td>
                 <td>${{ '%.2f' | format(expense.amount) }}</td>
                 <td>{{ expense.category }}</td>
                 <td>{{ expense.date.strftime('%Y-%m-%d') }}</td>
