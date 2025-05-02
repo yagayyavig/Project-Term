@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .back-video {
   position: fixed;
   top: 0;
@@ -21,3 +22,37 @@ body {
     overflow-x: hidden;
   }
   
+=======
+body {
+    font-family: sans-serif;
+    background: #eee;
+    margin: 0;
+    padding: 0;
+}
+
+.center-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.card {
+    background: #fff;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+.welcome-text {
+    margin-bottom: 10px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    background: #007BFF;
+    color: white;
+    text-decoration: none;
+}
+>>>>>>> 0ad7183a403931c286760b83964bb7aee6a31ac0

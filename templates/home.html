@@ -3,6 +3,7 @@
 {% block title %}Welcome{% endblock %}
 
 {% block content %}
+<<<<<<< HEAD
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <div>
     <video autoplay loop muted plays-inline class="back-video">
@@ -38,3 +39,13 @@
     }, 4000);
 </script>
 {% endblock %}
+=======
+<div class="center-box">
+    <div class="card" style="max-width: 600px; text-align: center;">
+        <h1 class="welcome-text">Welcome to Your Expense Tracker</h1>
+        <p>Manage your expenses efficiently and view your spending history.</p>
+        <a href="{{ url_for('list_expenses') }}" class="btn" style="margin-top: 1rem; font-size: 19px;">View Expenses</a>
+    </div>
+</div>
+{% endblock %}
+>>>>>>> 0ad7183a403931c286760b83964bb7aee6a31ac0

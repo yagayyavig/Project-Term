@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 
-{% block title %}Expense Tracker - Expenses{% endblock %}
+{% block title %}Expenses - Expense Tracker{% endblock %}
 
 {% block content %}
+<<<<<<< HEAD
 <link rel="stylesheet" href="{{ url_for('static', filename='e.css') }}">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet"/>
 <div class="top-banner" id="banner-text">
@@ -77,3 +78,58 @@
     }, 4000);
 </script>
 {% endblock %}
+=======
+
+
+<div class="center-box">
+    <div class="card" style="width: 120%; max-width: 1000px;">
+        <h1 style="text-align: center; margin-bottom: 1rem; font-size: 3rem">All Expenses</h1>
+
+        <!-- Filter Buttons -->
+        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 1rem;">
+            <a href="{{ url_for('list_expenses') }}" class="filter-btn">All</a>
+            <a href="{{ url_for('list_expenses', sort='id') }}" class="filter-btn">Sort by Id</a>
+            <a href="{{ url_for('list_expenses', sort='amount') }}" class="filter-btn">Sort by Amount</a>
+            <a href="{{ url_for('list_expenses', sort='date') }}" class="filter-btn">Sort by Date</a>
+            <a href="{{ url_for('list_expenses', sort='category') }}" class="filter-btn">Sort by Category</a>
+            <a class="filter-btn" href="{{ url_for('add_expense') }}">Add New Expense</a>
+        </div>
+
+        <!-- Expenses Table -->
+        {% if expenses %}
+        <div style="overflow-x: auto;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Amount</th>
+                        <th>Category</th>
+                        <th>Date</th>
+                        <th>Note</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for expense in expenses %}
+                    <tr>
+                        <td>{{ expense.id }}</td>
+                        <td>${{ '%.2f' | format(expense.amount) }}</td>
+                        <td>{{ expense.category }}</td>
+                        <td>{{ expense.date.strftime('%Y-%m-%d') }}</td>
+                        <td>{{ expense.note }}</td>
+                        <td>
+                            <a href="{{ url_for('edit_form', expense_id=expense.id) }}" class="btn">Edit</a>
+                            <a href="{{ url_for('confirm_delete', expense_id=expense.id) }}" class="btn-del">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+            <p style="text-align: center;">No expenses found.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+>>>>>>> 0ad7183a403931c286760b83964bb7aee6a31ac0
