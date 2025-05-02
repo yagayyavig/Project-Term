@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 :root {
   --accent: #00bfff;
   --hover: #7e57c2;
@@ -270,3 +271,5 @@ header nav a:hover::before {
   color: var(--accent);
   text-shadow: 0 0 8px rgba(0, 191, 255, 0.25);
 }
+=======
+>>>>>>> e018f5b (nick change css)
