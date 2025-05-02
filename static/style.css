@@ -2,11 +2,11 @@
   --accent: #00bfff;
   --hover: #7e57c2;
   --text: #e0f7fa;
-  --bg: linear-gradient(135deg, #0a0a0a, #0a1828, #101b30, #083365);
-  --card-bg: rgba(255, 255, 255, 0.02);
+  --bg: linear-gradient(135deg, #0a0a0a, #0a1828, #1c3259, #072f5d);
+  --card-bg: rgba(255, 0, 0, 0.02);
   --card-border: 1px solid rgba(132, 0, 255, 0.4);
   --card-shadow: 0 6px 20px rgba(132, 0, 255, 0.2), 0 0 20px rgba(132, 0, 255, 0.1);
-  --btn-bg: linear-gradient(to right, #00bfff, #7e57c2);
+  --btn-bg: linear-gradient(to right, #00bfff, #7e57c2 ) ;
 }
 
 /* Reset and base layout */
