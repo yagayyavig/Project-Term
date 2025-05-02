@@ -2,7 +2,10 @@
 ## Yagayya Vig, Shrey Dhand, Luis Morin, Samantha Lum & Nick Fiebelkorn
 
  
+<<<<<<< HEAD
 
+=======
+>>>>>>> a6ff5b85220db0e06a3d63727344e776500389ba
 # Project Term - Expense Tracker
 
 ## Team Members
