@@ -1,5 +1,4 @@
 from db import db
-from sqlalchemy import DateTime, Nullable 
 
 class Category(db.Model):
     __tablename__ = "categories"
