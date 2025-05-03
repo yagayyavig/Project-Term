@@ -1,11 +1,8 @@
 # Project Term - Budget Tracker
 ## Yagayya Vig, Shrey Dhand, Luis Morin, Samantha Lum & Nick Fiebelkorn
 
- 
-<<<<<<< HEAD
+---
 
-=======
->>>>>>> a6ff5b85220db0e06a3d63727344e776500389ba
 # Project Term - Expense Tracker
 
 ## Team Members
@@ -24,7 +21,8 @@ Users can add, view, sort, edit, and delete their expenses easily through a clea
 This project is built with Flask, SQLAlchemy 2.0, and a responsive front-end designed for both desktop and mobile use.
 
 The project is divided into multiple sprints following Agile methodology.  
-Sprint 1 focused on building the core backend and basic functionality of the app.
+Sprint 1 focused on building the core backend and basic functionality of the app.  
+Sprint 2 builds on that by adding front-end features, better UX, and category filters.
 
 ---
 
@@ -52,15 +50,25 @@ Create the Minimum Viable Product (MVP) that supports basic expense management w
 
 ---
 
-## Remaining Sprint 1 Tasks (assigned to teammates):
+## Sprint 2 - Deliverables (Week 2)
 
-- `add_expense.html` template (Add form) 
-- `edit_expense.html` template (Edit form) 
-- `expenses.html` template (Table to display expenses)
-- `error.html` template (Display error messages)
-- Edit Expense backend route (`/expenses/<id>`)
-- Delete Expense backend route (`/expenses/<id>/delete`)
-- CSS style for the app 
+**Main Goal:**  
+Enhance functionality and design by implementing sorting, editing, deleting, and filtering by category.
+
+### Features Completed in Sprint 2:
+
+- `add_expense.html` and `edit_expense.html` templates finalized
+- `expenses.html` implemented with table view of all expenses
+- Edit and delete functionality added and tested
+- Error handling (`error.html`) created
+- Dynamic category filter on `/expenses?category=Food`, etc.
+- Sorting options by `amount`, `date`, and `category` with filter buttons
+- Category dropdown added to the Add Expense form
+- Minor UI improvements and CSS refinements for responsiveness
+- Reorganized routes for modularity and clarity
+- Validations enhanced: No empty fields, valid categories, etc.
+- Improved error display with flash messages
+
 ---
 
 ## Project Technologies
@@ -70,7 +78,7 @@ Create the Minimum Viable Product (MVP) that supports basic expense management w
 - SQLAlchemy 2.0 (ORM)
 - SQLite (local database)
 - Jinja2 (for templating)
-- HTML + CSS 
+- HTML + CSS
 
 ---
 
@@ -81,10 +89,12 @@ Create the Minimum Viable Product (MVP) that supports basic expense management w
 git clone https://github.com/yagayyavig/Project-Term.git
 cd expense-tracker
 
-# Requirements to run the project 
-pip install Flask 
-pip install flask_SQLAlchemy
+# Create virtual environment (optional but recommended)
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install required packages
+pip install -r requirements.txt
 
 # Run the app
 python app.py
-```
