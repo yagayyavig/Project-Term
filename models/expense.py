@@ -11,5 +11,3 @@ class Expense(db.Model):
     date = db.mapped_column(DateTime, nullable=False)
     note = db.mapped_column(db.String)
 
-    category_id = db.mapped_column(db.Integer, db.ForeignKey("categories.id"))
-    category = db.relationship("Category", back_populates="expenses")
