@@ -1,15 +1,20 @@
 import pytest
-from app import app, db
+from app import app as flask_app, db
 
 @pytest.fixture
-def client():
-    app.config.update({
+def app():
+    # Set up the Flask app in testing mode with in-memory SQLite
+    flask_app.config.update({
         "TESTING": True,
         "SQLALCHEMY_DATABASE_URI": "sqlite:///:memory:",
         "SQLALCHEMY_TRACK_MODIFICATIONS": False
     })
 
-    with app.app_context():
+    with flask_app.app_context():
         db.create_all()
-        yield app.test_client()
+        yield flask_app
         db.drop_all()
+
+@pytest.fixture
+def client(app):
+    return app.test_client()
