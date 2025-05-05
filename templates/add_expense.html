@@ -15,7 +15,11 @@
 
             <div>
                 <label>Category:</label><br>
-                <input type="text" name="category" required class="input-box">
+                <select name="category_id" required class="input-box">
+                    {% for category in categories %}
+                        <option value="{{ category.id }}">{{ category.name }}</option>
+                    {% endfor %}
+                </select>
             </div>
 
             <div>

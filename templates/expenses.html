@@ -38,7 +38,7 @@
                     <tr>
                         <td>{{ expense.id }}</td>
                         <td>${{ '%.2f' | format(expense.amount) }}</td>
-                        <td>{{ expense.category }}</td>
+                        <td>{{ expense.category.name }}</td>
                         <td>{{ expense.date.strftime('%Y-%m-%d') }}</td>
                         <td>{{ expense.note }}</td>
                         <td>
