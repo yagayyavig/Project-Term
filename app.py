@@ -4,6 +4,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from db import db
 from models.expense import Expense
+from models.category import Category
 from sqlalchemy import select
 from datetime import datetime
 from pathlib import Path
@@ -15,8 +16,33 @@ app.instance_path = Path(".").resolve()
 db.init_app(app)
 
 with app.app_context():
-    from models import expense
+    from models import expense, category
     db.create_all()
+
+    # Create Default Categories
+    default_categories = [
+    "Dining Out 🍽️",
+    "Education 🎓",
+    "Entertainment 🎬",
+    "Gas ⛽",
+    "Groceries 🛒",
+    "Health & Medical 💊",
+    "Internet & Phone 📶",
+    "Personal Care 🧴",
+    "Rent 🏠",
+    "Transport 🚌",
+    "Utilities 💡",
+    "Other 📁"
+]
+
+    for name in default_categories:
+        exists = db.session.execute(
+            select(Category).where(Category.name == name)
+        ).scalars().first()
+
+        if not exists:
+            db.session.add(Category(name=name))
+    db.session.commit()
 
 # Home Page
 @app.route("/")
@@ -38,30 +64,34 @@ def list_expenses():
     elif sort == "date":
         stmt = stmt.order_by(Expense.date)
     elif sort == "category":
-        stmt = stmt.order_by(Expense.category)
+        stmt = (select(Expense).join(Expense.category).order_by(Category.name))
 
     expenses = db.session.execute(stmt).scalars().all()
     return render_template("expenses.html", expenses=expenses)
 
 # Add Expense
 @app.route("/expenses/add", methods=["GET"])
-def add_expense():
+def add_expense_form():
+    categories = db.session.execute(select(Category)).scalars().all()
     today = datetime.today().strftime('%Y-%m-%d')
-    return render_template("add_expense.html", today=today)
+    return render_template("add_expense.html", today=today, categories=categories)
 
 @app.route("/expenses/add", methods=["POST"])
-def submit_new_expense():
+def add_expense():
     amount = float(request.form["amount"])
-    category = request.form["category"]
+    category_id = int(request.form["category_id"])
     date = datetime.strptime(request.form["date"], "%Y-%m-%d").date()
     note = request.form["note"]
 
     today = datetime.today().date()
-
     if date > today:
         return render_template("error.html", message="Cannot add expense for a future date!")
+    
+    stmt = select(Category).where(Category.id == category_id)
+    category = db.session.execute(stmt).scalars().first()
 
     new_expense = Expense(amount=amount, category=category, date=date, note=note)
+
     db.session.add(new_expense)
     db.session.commit()
     return redirect(url_for("list_expenses"))
@@ -76,8 +106,11 @@ def edit_form(expense_id):
     if not expense:
         return render_template("error.html", message="No expense matching the ID")
     
+    categories = db.session.execute(select(Category)).scalars().all() 
     today = datetime.today().strftime("%Y-%m-%d")
-    return render_template("edit_expense.html", expense=expense, today=today)
+    
+    print("Categories:", [c.name for c in categories])
+    return render_template("edit_expense.html", expense=expense, categories=categories, today=today)
 
 # Edit Expense
 @app.route("/expenses/edit/<int:expense_id>", methods=["POST"])
@@ -89,7 +122,7 @@ def edit_expense(expense_id):
         return render_template("error.html", message="No expense matching the ID")
     
     amount = float(request.form["amount"])
-    category = request.form["category"]
+    category_id = int(request.form["category_id"])
     date = datetime.strptime(request.form["date"], "%Y-%m-%d").date()
     note = request.form["note"]
     
@@ -97,6 +130,11 @@ def edit_expense(expense_id):
     if date > today:
         return render_template("error.html", message="Cannot set a future date for the expense")
     
+    stmt1 =  select(Category).where(Category.id == category_id)
+    category = db.session.execute(stmt1).scalars().first()
+    if not category:
+        return render_template("error.html", message="Invalid category selected")
+
     expense.amount = amount
     expense.category = category
     expense.date = date

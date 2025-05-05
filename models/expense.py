@@ -11,3 +11,9 @@ class Expense(db.Model):
     date = db.mapped_column(DateTime, nullable=False)
     note = db.mapped_column(db.String)
 
+    # Category foreign key and relationship
+    category_id = db.Column(db.Integer, db.ForeignKey("category.id"), nullable=False)
+    category = db.relationship("Category", back_populates="expenses")
+
+    def __repr__(self):
+        return f"<Expense {self.amount} on {self.date}>"

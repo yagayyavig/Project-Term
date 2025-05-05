@@ -11,6 +11,7 @@ def app():
     })
 
     with flask_app.app_context():
+        from models import category, expense # Ensure all models are registered
         db.create_all()
         yield flask_app
         db.drop_all()
