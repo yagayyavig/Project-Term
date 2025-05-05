@@ -117,35 +117,47 @@ def create_app(test_config=None):
         db.session.commit()
         return redirect(url_for("list_expenses"))
 
-    # Take you to confirm delete (this doesn't delete anything, just takes you to the confim page)
+    # Take you to confirm delete (this doesn't delete anything, just takes you to the confirm page)
     @app.route("/expenses/<int:expense_id>/deleteconfirm")
     def confirm_delete(expense_id):
         stmt = select(Expense).where(Expense.id == expense_id)
         expense = db.session.execute(stmt).scalars().first()
 
-        # this if statment checks that the expense actally exists 
+        # this if statement checks that the expense actually exists 
         if not expense:
             return render_template("error.html", message= "No expense matching the ID")
         
         return render_template("confirm_delete.html", expense=expense)
 
 
-    # Actally Delete Expense
+    # Actually Delete Expense
     @app.route("/expenses/<int:expense_id>/delete", methods=["POST"])
     # choose what expense to delete based on unique id
     def delete_expense(expense_id):
         stmt = select(Expense).where(Expense.id == expense_id)
         expense = db.session.execute(stmt).scalars().first()
 
-        # this if statment checks that the expense actally exists 
+        # this if statement checks that the expense actually exists 
         if not expense:
             return render_template("error.html", message= "No expense matching the ID")
         
         # this deletes the chosen expense and commits the changes 
         db.session.delete(expense)
         db.session.commit()
-        # return back to expeses page after deletion
+        # return back to expenses page after deletion
         return redirect(url_for('list_expenses'))
+    
+
+    @app.route("/expenses/category/<int:category_id>")
+    def expenses_by_category(category_id):
+        category = db.session.get(Category, category_id)
+        if not category:
+            return render_template("error.html", message="Category not found.")
+
+        stmt = select(Expense).where(Expense.category_id == category_id)
+        expenses = db.session.execute(stmt).scalars().all()
+        return render_template("expenses_by_category.html", expenses=expenses, category=category)
+
     
     return app
 
