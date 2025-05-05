@@ -1,24 +1,21 @@
 {% extends "base.html" %}
 
-{% block title %}Expenses - Expense Tracker{% endblock %}
+{% block title %}{{ category.name }} Expenses - Expense Tracker{% endblock %}
 
 {% block content %}
-
-
 <div class="center-box">
     <div class="card" style="width: 120%; max-width: 1000px;">
-        <h1 style="text-align: center; margin-bottom: 1rem; font-size: 3rem">All Expenses</h1>
+        <h1 style="text-align: center; margin-bottom: 1rem; font-size: 2.5rem">
+            Expenses in "{{ category.name }}"
+        </h1>
 
-        <!-- Filter Buttons -->
-        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 1rem;">
-            <a href="{{ url_for('list_expenses', sort='id') }}" class="filter-btn">Sort by Id</a>
-            <a href="{{ url_for('list_expenses', sort='amount') }}" class="filter-btn">Sort by Amount</a>
-            <a href="{{ url_for('list_expenses', sort='date') }}" class="filter-btn">Sort by Date</a>
-            <a href="{{ url_for('list_expenses', sort='category') }}" class="filter-btn">Sort by Category</a>
-            <a class="filter-btn" href="{{ url_for('add_expense') }}">Add New Expense</a>
-        </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 1rem;">
+                <a href="{{ url_for('list_expenses', sort='id') }}" class="filter-btn">Sort by Id</a>
+                <a href="{{ url_for('list_expenses', sort='amount') }}" class="filter-btn">Sort by Amount</a>
+                <a href="{{ url_for('list_expenses', sort='date') }}" class="filter-btn">Sort by Date</a>
+                <a class="filter-btn" href="{{ url_for('list_expenses') }}">Back to All Expenses</a>
+            </div>
 
-        <!-- Expenses Table -->
         {% if expenses %}
         <div style="overflow-x: auto;">
             <table>
@@ -26,7 +23,6 @@
                     <tr>
                         <th>Id</th>
                         <th>Amount</th>
-                        <th>Category</th>
                         <th>Date</th>
                         <th>Note</th>
                         <th>Actions</th>
@@ -37,11 +33,6 @@
                     <tr>
                         <td>{{ expense.id }}</td>
                         <td>${{ '%.2f' | format(expense.amount) }}</td>
-                        <td>
-                            <a href="{{ url_for('expenses_by_category', category_id=expense.category.id) }}">
-                              {{ expense.category.name }}
-                            </a>
-                        </td>
                         <td>{{ expense.date.strftime('%Y-%m-%d') }}</td>
                         <td>{{ expense.note }}</td>
                         <td>
@@ -54,7 +45,7 @@
             </table>
         </div>
         {% else %}
-            <p style="text-align: center;">No expenses found.</p>
+            <p style="text-align: center;">No expenses found in this category.</p>
         {% endif %}
     </div>
 </div>
