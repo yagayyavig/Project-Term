@@ -9,12 +9,13 @@
             Expenses in "{{ category.name }}"
         </h1>
 
-            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 1rem;">
-                <a href="{{ url_for('list_expenses', sort='id') }}" class="filter-btn">Sort by Id</a>
-                <a href="{{ url_for('list_expenses', sort='amount') }}" class="filter-btn">Sort by Amount</a>
-                <a href="{{ url_for('list_expenses', sort='date') }}" class="filter-btn">Sort by Date</a>
-                <a class="filter-btn" href="{{ url_for('list_expenses') }}">Back to All Expenses</a>
-            </div>
+        <!-- Sort Buttons -->
+        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 1rem;">
+            <a href="{{ url_for('expenses_by_category', category_id=category.id, sort='id') }}" class="filter-btn">Sort by Id</a>
+            <a href="{{ url_for('expenses_by_category', category_id=category.id, sort='amount') }}" class="filter-btn">Sort by Amount</a>
+            <a href="{{ url_for('expenses_by_category', category_id=category.id, sort='date') }}" class="filter-btn">Sort by Date</a>
+            <a class="filter-btn" href="{{ url_for('list_expenses') }}">Back to All Expenses</a>
+        </div>
 
         {% if expenses %}
         <div style="overflow-x: auto;">

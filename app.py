@@ -154,9 +154,19 @@ def create_app(test_config=None):
         if not category:
             return render_template("error.html", message="Category not found.")
 
+        sort = request.args.get("sort")
         stmt = select(Expense).where(Expense.category_id == category_id)
+
+        if sort == "id":
+            stmt = stmt.order_by(Expense.id)
+        elif sort == "amount":
+            stmt = stmt.order_by(Expense.amount)
+        elif sort == "date":
+            stmt = stmt.order_by(Expense.date)
+
         expenses = db.session.execute(stmt).scalars().all()
         return render_template("expenses_by_category.html", expenses=expenses, category=category)
+
 
     
     return app
