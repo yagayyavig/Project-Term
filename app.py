@@ -58,6 +58,10 @@ def create_app(test_config=None):
         date = datetime.strptime(request.form["date"], "%Y-%m-%d").date()
         note = request.form["note"]
 
+        if amount < 0:
+            return render_template("error.html", message="Cannot add a negative amount!")
+
+            
         today = datetime.today().date()
         if date > today:
             return render_template("error.html", message="Cannot add expense for a future date!")
