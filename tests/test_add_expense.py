@@ -1,4 +1,6 @@
+from urllib import response
 from db import db
+from models import category
 from models.category import Category
 from datetime import datetime, timedelta
 
@@ -38,3 +40,18 @@ def test_add_expense_valid(client, app):
         }, follow_redirects=True)
         assert response.status_code == 200
         assert b"Test lunch" in response.data
+
+def test_negative_amount(client, app):
+    with app.app_context():
+        category = create_category("Travel")
+        today = datetime.today().strftime("%Y-%m-%d")
+
+        response = client.post("/expenses/add", data={
+            "amount": "-100",
+            "category_id": str(category.id),
+            "date": today,
+            "note": "Test lunch"
+        }, follow_redirects=True)
+
+        assert response.status_code == 200
+        assert b"Cannot add a negative amount" in response.data
