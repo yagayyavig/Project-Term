@@ -15,7 +15,7 @@ def test_confirm_delete_button(client, app):
         category = create_category()
         expense = Expense(
             amount=10.0,
-            category=category,  # FIXED: use Category instance
+            category=category,  
             note="Test",
             date=datetime(2025, 1, 1)
         )
@@ -40,7 +40,7 @@ def test_cancel_button(client, app):
         category = create_category()
         expense = Expense(
             amount=10.0,
-            category=category,  # FIXED: use Category instance
+            category=category,  
             note="Test",
             date=datetime(2025, 1, 1)
         )
@@ -58,3 +58,12 @@ def test_cancel_button(client, app):
     with app.app_context():
         exists = db.session.get(Expense, expense_id)
         assert exists is not None
+
+# test to check if you delete a non-existing id its an error
+def test_delete_error(client):
+    # Try to delete an expense that doesnt exist
+    response = client.post("/expenses/9999999/delete", follow_redirects=True)
+
+    # make sure you get an error
+    assert response.status_code == 404 or b"Error" in response.data
+
