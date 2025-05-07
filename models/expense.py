@@ -1,5 +1,5 @@
 from db import db
-from sqlalchemy import DateTime 
+from sqlalchemy import DateTime
 
 
 class Expense(db.Model):
@@ -10,3 +10,4 @@ class Expense(db.Model):
     category = db.mapped_column(db.String, nullable=False)
     date = db.mapped_column(DateTime, nullable=False)
     note = db.mapped_column(db.String)
+
