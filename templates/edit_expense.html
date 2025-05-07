@@ -18,7 +18,13 @@
 
             <div>
                 <label>Category:</label><br>
-                <input type="text" name="category" value="{{ expense.category }}" required class="input-box">
+                <select name="category_id" required class="input-box">
+                    {% for category in categories %}
+                        <option value="{{ category.id }}" {% if category.id == expense.category.id %}selected{% endif %}>
+                            {{ category.name }}
+                        </option>
+                    {% endfor %}
+                </select>
             </div>
 
             <div>
