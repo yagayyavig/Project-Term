@@ -18,7 +18,13 @@
 
             <div>
                 <label>Category:</label><br>
-                <input type="text" name="category" value="{{ expense.category }}" required class="input-box">
+                <select name="category_id" required class="input-box">
+                    {% for category in categories %}
+                        <option value="{{ category.id }}" {% if category.id == expense.category.id %}selected{% endif %}>
+                            {{ category.name }}
+                        </option>
+                    {% endfor %}
+                </select>
             </div>
 
             <div>
@@ -35,7 +41,7 @@
         </form>
 
         <div style="margin-top: 1rem; text-align: center; font-size: 19px;">
-            <a href="{{ url_for('list_expenses') }}" class="btn">Back to Expenses</a>
+            <a href="{{ url_for('list_expenses') }}" class="btn-back">Back to Expenses</a>
         </div>
     </div>
 </div>

@@ -1,34 +1,99 @@
 body {
-    font-family: sans-serif;
-    background: #eee;
     margin: 0;
-    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #1e1e1e;
+    padding: 1rem 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 15rem;
+}
+
+nav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #c085f6;
+}
+
+.main-content {
+    flex: 1;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+footer {
+    background-color: #1e1e1e;
+    color: #888;
+    text-align: center;
+    padding: 1rem 0;
+    font-size: 0.9rem;
+}
+
+.card {
+    background-color: #232323;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    width: 60%;
+    max-width: 1000px;
+    text-align: center;
 }
 
 .center-box {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    width: 100%;
+    flex-direction: column; 
 }
 
-.card {
-    background: #fff;
-    padding: 20px;
-    text-align: center;
-    border: 1px solid #ccc;
-}
-
-.welcome-text {
-    margin-bottom: 10px;
+h1, h2, h3 {
+    color: #c085f6;
+    margin-bottom: 1rem;
 }
 
 .btn {
-    display: inline-block;
-    padding: 10px 15px;
-    background: #007BFF;
-    color: white;
+    background-color: #c085f6;
+    color: #121212;
+    padding: 0.5rem 1rem;
+    border: none;
+    font-size: 1rem;
     text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+}
+
+.btn:hover {
+    background-color: #a36ccf;
+}
+
+.btn-del {
+    background-color: #e53935;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border: none;
+    font-size: 0.95rem;
+    text-decoration: none;
+<<<<<<< HEAD
 }
 
 
@@ -42,3 +107,129 @@ body {
     object-fit: cover;
     object-position: center;
 }
+=======
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-del:hover {
+    background-color: #c62828;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+label {
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+    display: inline-block;
+}
+
+.input-box {
+    width: 40%;
+    padding: 0.75rem;
+    background-color: #2a2a2a;
+    color: #e0e0e0;
+    border: 1px solid #444;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.input-box:focus {
+    border-color: #c085f6;
+    outline: none;
+}
+
+.filter-btn {
+    background-color: #333;
+    color: #e0e0e0;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: background-color 0.3s ease;
+    margin: 0.25rem; 
+}
+
+.filter-btn:hover {
+    background-color: #444;
+}
+
+.filter-btn-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    font-size: 0.95rem;
+}
+
+th, td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #444;
+}
+
+th {
+    background-color: #1f1f1f;
+    color: #c085f6;
+    font-weight: 600;
+}
+
+td a {
+    color: #c085f6;
+    text-decoration: underline;
+}
+
+tr:hover {
+    background-color: #2a2a2a;
+}
+
+@media (max-width: 768px) {
+    .card {
+        width: 90%;
+        padding: 1rem;
+    }
+
+    .input-box {
+        width: 100%;
+    }
+
+    .btn {
+        font-size: 0.95rem;
+    }
+
+    table {
+        font-size: 0.9rem;
+    }
+
+    th, td {
+        padding: 0.5rem;
+    }
+
+    .filter-btn {
+        font-size: 0.85rem; 
+    }
+}
+
+.btn-back {
+    background-color: #ffffffa9;
+    color: #121212;
+    padding: 0.5rem 1rem;
+    margin-top: 0.5rem;
+    border: none;
+    font-size: 0.95rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+}
+>>>>>>> 9e678d944e3f21735e4f45433fec6c94c38d2af4
