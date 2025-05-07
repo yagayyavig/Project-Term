@@ -19,7 +19,6 @@
     transform: scale(1.05);
   }
 
-<<<<<<< HEAD
   body {
     margin: 0;
     padding: 4rem 1rem 2rem;
@@ -130,6 +129,44 @@
     flex-direction: column;
     align-items: center;
   }
+
+footer,.c{
+    font-family: 'Playfair Display', serif;
+    color:white;
+  }
+
+  nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    text-align: center;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    font-family: 'Playfair Display', serif;
+    z-index: 9999;
+  }
+
+  footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white];
+    text-align: center;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    font-family: 'Playfair Display', serif;
+    z-index: 9999;
+}
+
+ 
+  
 </style>
 
 <div class="top-banner" id="banner-text">
@@ -140,64 +177,10 @@
   <video autoplay muted loop class="back-video">
     <source src="{{ url_for('static', filename='e.mp4') }}" type="video/mp4" />
   </video>
-=======
-<div class="center-box">
-    <div class="card" style="width: 120%; max-width: 1000px;">
-        <h1 style="text-align: center; margin-bottom: 1rem; font-size: 3rem">All Expenses</h1>
-
-        <!-- Filter Buttons -->
-        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 1rem;">
-            <a href="{{ url_for('list_expenses', sort='id') }}" class="filter-btn">Sort by Id</a>
-            <a href="{{ url_for('list_expenses', sort='amount') }}" class="filter-btn">Sort by Amount</a>
-            <a href="{{ url_for('list_expenses', sort='date') }}" class="filter-btn">Sort by Date</a>
-            <a href="{{ url_for('list_expenses', sort='category') }}" class="filter-btn">Sort by Category</a>
-            <a class="filter-btn" href="{{ url_for('add_expense') }}">Add New Expense</a>
-        </div>
-
-        <!-- Expenses Table -->
-        {% if expenses %}
-        <div style="overflow-x: auto;">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Amount</th>
-                        <th>Category</th>
-                        <th>Date</th>
-                        <th>Note</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for expense in expenses %}
-                    <tr>
-                        <td>{{ expense.id }}</td>
-                        <td>${{ '%.2f' | format(expense.amount) }}</td>
-                        <td>
-                            <a href="{{ url_for('expenses_by_category', category_id=expense.category.id) }}">
-                              {{ expense.category.name }}
-                            </a>
-                        </td>
-                        <td>{{ expense.date.strftime('%Y-%m-%d') }}</td>
-                        <td>{{ expense.note }}</td>
-                        <td>
-                            <a href="{{ url_for('edit_form', expense_id=expense.id) }}" class="btn">Edit</a>
-                            <a href="{{ url_for('confirm_delete', expense_id=expense.id) }}" class="btn-del">Delete</a>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-        {% else %}
-            <p style="text-align: center;">No expenses found.</p>
-        {% endif %}
-    </div>
->>>>>>> 9e678d944e3f21735e4f45433fec6c94c38d2af4
 </div>
 
 <div class="center">
-  <h1>The Ledger</h1>
+  <h1 class="c">The Ledger</h1>
 
   <div class="button-group">
     <a href="{{ url_for('list_expenses') }}" class="filter-btn">(All)</a>
@@ -214,12 +197,12 @@
     <table>
       <thead>
         <tr>
-          <th>ID</th>
-          <th>Amount</th>
-          <th>Category</th>
-          <th>Date</th>
-          <th>Note</th>
-          <th>Actions</th>
+          <th class="c">ID</th>
+          <th class="c">Amount</th>
+          <th class="c">Category</th>
+          <th class="c">Date</th>
+          <th class="c">Note</th>
+          <th class="c">Actions</th>
         </tr>
       </thead>
       <tbody>
