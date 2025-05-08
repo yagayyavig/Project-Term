@@ -55,4 +55,3 @@ def test_negative_amount(client, app):
 
         assert response.status_code == 200
         assert b"Cannot add a negative amount" in response.data
-
