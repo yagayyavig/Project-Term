@@ -117,6 +117,44 @@
     flex-direction: column;
     align-items: center;
   }
+
+footer,.c{
+    font-family: 'Playfair Display', serif;
+    color:white;
+  }
+
+  nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    text-align: center;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    font-family: 'Playfair Display', serif;
+    z-index: 9999;
+  }
+
+  footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white];
+    text-align: center;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    font-family: 'Playfair Display', serif;
+    z-index: 9999;
+}
+
+ 
+  
 </style>
 
 <div class="top-banner" id="banner-text">
@@ -130,7 +168,7 @@
 </div>
 
 <div class="center">
-  <h1>The Ledger</h1>
+  <h1 class="c">The Ledger</h1>
 
   <div class="button-group">
     <a href="{{ url_for('list_expenses') }}" class="filter-btn">(All)</a>
@@ -147,12 +185,12 @@
     <table>
       <thead>
         <tr>
-          <th>ID</th>
-          <th>Amount</th>
-          <th>Category</th>
-          <th>Date</th>
-          <th>Note</th>
-          <th>Actions</th>
+          <th class="c">ID</th>
+          <th class="c">Amount</th>
+          <th class="c">Category</th>
+          <th class="c">Date</th>
+          <th class="c">Note</th>
+          <th class="c">Actions</th>
         </tr>
       </thead>
       <tbody>
