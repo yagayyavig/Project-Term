@@ -1,61 +1,234 @@
 {% extends "base.html" %}
 
-{% block title %}Expenses - Expense Tracker{% endblock %}
+{% block title %}Expense Tracker - Expenses{% endblock %}
 
 {% block content %}
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet" />
+
+<style>
+  .back-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: blur(4px);
+    transform: scale(1.05);
+  }
+
+  body {
+    margin: 0;
+    padding: 4rem 1rem 2rem;
+    background-color: black;
+    color: white;
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+  }
 
 
-<div class="center-box">
-    <div class="card" style="width: 120%; max-width: 1000px;">
-        <h1 style="text-align: center; margin-bottom: 1rem; font-size: 3rem">All Expenses</h1>
 
-        <!-- Filter Buttons -->
-        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 1rem;">
-            <a href="{{ url_for('list_expenses', sort='id') }}" class="filter-btn">Sort by Id</a>
-            <a href="{{ url_for('list_expenses', sort='amount') }}" class="filter-btn">Sort by Amount</a>
-            <a href="{{ url_for('list_expenses', sort='date') }}" class="filter-btn">Sort by Date</a>
-            <a href="{{ url_for('list_expenses', sort='category') }}" class="filter-btn">Sort by Category</a>
-            <a class="filter-btn" href="{{ url_for('add_expense') }}">Add New Expense</a>
-        </div>
+  h1 {
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+  }
 
-        <!-- Expenses Table -->
-        {% if expenses %}
-        <div style="overflow-x: auto;">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Amount</th>
-                        <th>Category</th>
-                        <th>Date</th>
-                        <th>Note</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for expense in expenses %}
-                    <tr>
-                        <td>{{ expense.id }}</td>
-                        <td>${{ '%.2f' | format(expense.amount) }}</td>
-                        <td>
-                            <a href="{{ url_for('expenses_by_category', category_id=expense.category.id) }}">
-                              {{ expense.category.name }}
-                            </a>
-                        </td>
-                        <td>{{ expense.date.strftime('%Y-%m-%d') }}</td>
-                        <td>{{ expense.note }}</td>
-                        <td>
-                            <a href="{{ url_for('edit_form', expense_id=expense.id) }}" class="btn">Edit</a>
-                            <a href="{{ url_for('confirm_delete', expense_id=expense.id) }}" class="btn-del">Delete</a>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-        {% else %}
-            <p style="text-align: center;">No expenses found.</p>
-        {% endif %}
-    </div>
+  .center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 6rem;
+    padding: 1rem;
+  }
+
+  .button-group {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .filter-btn, .btn {
+    padding: 0.6rem 1.4rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(6px);
+  }
+
+  .filter-btn:hover, .btn:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    color: black;
+    border-color: white;
+    transform: scale(1.05);
+  }
+
+  table {
+    width: 100%;
+    max-width: 900px;
+    margin: 2.5rem auto;
+    border-collapse: collapse;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  th, td {
+    padding: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  th {
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  td {
+    font-size: 0.95rem;
+  }
+
+  .back-video-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -2;
+  }
+
+  .button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+footer,.c{
+    font-family: 'Playfair Display', serif;
+    color:white;
+  }
+
+  nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-bottom: 20px;
+    width: 100%;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    text-align: center;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    font-family: 'Playfair Display', serif;
+    z-index: 9999;
+  }
+
+  footer {
+   
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    text-align: center;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    font-family: 'Playfair Display', serif;
+    z-index: 9999;
+}
+
+ 
+  
+</style>
+
+<div class="top-banner" id="banner-text">
+  VAULT CONTENTS — MONITOR YOUR SPENDING ACTIVITY
 </div>
+
+<div class="back-video-wrapper">
+  <video autoplay muted loop class="back-video">
+    <source src="{{ url_for('static', filename='e.mp4') }}" type="video/mp4" />
+  </video>
+</div>
+
+<div class="center">
+  <h1 class="c">The Ledger</h1>
+
+  <div class="button-group">
+    <a href="{{ url_for('list_expenses') }}" class="filter-btn">(All)</a>
+    <a href="{{ url_for('list_expenses', sort='amount') }}" class="filter-btn">Sort by Amount</a>
+    <a href="{{ url_for('list_expenses', sort='date') }}" class="filter-btn">Sort by Date</a>
+    <a href="{{ url_for('list_expenses', sort='category') }}" class="filter-btn">Sort by Category</a>
+  </div>
+
+  <div class="button-group">
+    <a href="{{ url_for('add_expense') }}" class="filter-btn">Add New Entry</a>
+  </div>
+
+  {% if expenses %}
+    <table>
+      <thead>
+        <tr>
+          <th class="c">ID</th>
+          <th class="c">Amount</th>
+          <th class="c">Category</th>
+          <th class="c">Date</th>
+          <th class="c">Note</th>
+          <th class="c">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for expense in expenses %}
+        <tr>
+          <td>{{ expense.id }}</td>
+          <td>${{ '%.2f' | format(expense.amount) }}</td>
+          <td>{{ expense.category.name }}</td>
+          <td>{{ expense.date.strftime('%Y-%m-%d') }}</td>
+          <td>{{ expense.note }}</td>
+          <td>
+            <div class="button">
+              <a href="{{ url_for('edit_form', expense_id=expense.id) }}" class="btn">Edit</a>
+              <br>
+              <a href="{{ url_for('confirm_delete', expense_id=expense.id) }}" class="btn">Delete</a>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No expenses found.</p>
+  {% endif %}
+</div>
+
+<script>
+  const messages = [
+    "VAULT CONTENTS — MONITOR YOUR SPENDING ACTIVITY",
+    "REVIEW YOUR TRANSACTION HISTORY",
+    "EDIT, DELETE, OR SORT WITH EASE",
+    "KEEP TRACK. STAY AHEAD."
+  ];
+  let index = 0;
+  const banner = document.getElementById("banner-text");
+
+  setInterval(() => {
+    index = (index + 1) % messages.length;
+    banner.textContent = messages[index];
+  }, 4000);
+</script>
 {% endblock %}
