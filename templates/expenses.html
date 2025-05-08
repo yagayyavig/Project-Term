@@ -197,7 +197,12 @@ footer,.c{
         <tr>
           <td>{{ expense.id }}</td>
           <td>${{ '%.2f' | format(expense.amount) }}</td>
-          <td>{{ expense.category.name }}</td>
+          <td>
+            <a href="{{ url_for('expenses_by_category', category_id=expense.category.id) }}" class="filter-btn">
+              {{ expense.category.name }}
+            </a>
+          </td>
+          
           <td>{{ expense.date.strftime('%Y-%m-%d') }}</td>
           <td>{{ expense.note }}</td>
           <td>
