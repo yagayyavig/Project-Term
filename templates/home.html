@@ -3,12 +3,156 @@
 {% block title %}Welcome{% endblock %}
 
 {% block content %}
-<div class="center-box">
-    <div class="card" style="max-width: 600px; text-align: center;">
-        <h1 class="welcome-text">Welcome to Your Expense Tracker</h1>
-        <p>Manage your expenses efficiently and view your spending history.</p>
-        <a href="{{ url_for('list_expenses') }}" class="btn" style="margin-top: 1rem; font-size: 19px;">View Expenses</a>
-    </div>
-</div>
-{% endblock %}
 
+<video autoplay loop muted playsinline class="back-video">
+    <source src="{{ url_for('static', filename='video.mp4') }}" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+<style>
+.back-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    object-position: center;
+    transform: scale(1.05);
+  }
+  .car{
+    text-align: center;
+    align-items: center;
+  }
+  nav,footer{
+    font-family: 'Playfair Display', serif;
+    color:white;
+
+  }
+  nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    text-align: center;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    font-family: 'Playfair Display', serif;
+    z-index: 9999;
+  }
+
+  footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    text-align: center;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    font-family: 'Playfair Display', serif;
+    z-index: 9999;
+}
+
+ 
+
+</style>
+
+<style>  
+.back-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    object-position: center;
+    filter: blur(4px);
+    transform: scale(1.05);
+  }</style>
+
+<div style="
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Playfair Display', serif;
+    color: white;
+    text-align: center;
+    padding: 0 1rem;
+">
+
+    <div id="banner-text" style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        color: black;
+        text-align: center;
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        letter-spacing: 0.1em;
+        font-family: 'Playfair Display', serif;
+        z-index: 9999;
+    ">
+        THE VAULT IS NOW OPEN. TRACK YOUR SPENDING IN STYLE.
+    </div>
+
+    <div style="
+        background: rgba(36, 36, 36, 0.38);
+        padding: 2rem;
+        border-radius: 12px;
+        max-width: 500px;
+        width: 100%;
+        align-items: center;
+    ">
+        <div class="car" style="width: 100%; max-width: 500px; text-align: center">
+            <h1 style="margin-bottom: 1rem; font-size: 3rem; letter-spacing: 3px;">
+                DECODE YOUR SPENDING
+            </h1>
+            <p style="letter-spacing: 0.1em; text-transform: uppercase;">
+                ENTER THE VAULT AND VIEW YOUR EXPENSES HERE
+            </p>
+            <a href="{{ url_for('list_expenses') }}">
+                <button style="
+                    padding: 0.6rem 1.2rem;
+                    margin: 5px;
+                    font-size: 1rem;
+                    border: none;
+                    border-radius: 8px;
+                    background-color: #ffffffcc;
+                    color: #000;
+                    cursor: pointer;
+                    transition: background-color 0.3s ease;
+                    font-family: 'Playfair Display', serif;
+                " onmouseover="this.style.backgroundColor='#ffffff'"
+                    onmouseout="this.style.backgroundColor='#ffffffcc'">
+                    ENTER
+                </button>
+            </a>
+        </div>
+    </div>
+</div><script>
+    const messages = [
+        "THE VAULT IS NOW OPEN. TRACK YOUR SPENDING IN STYLE.",
+        "SPEND SMART. LIVE BOLD.",
+        "KNOW WHERE EVERY DOLLAR GOES."
+    ];
+
+    let index = 0;
+    const banner = document.getElementById("banner-text");
+
+    setInterval(() => {
+        index = (index + 1) % messages.length;
+        banner.textContent = messages[index];
+    }, 4000);
+</script>
+{% endblock %}
