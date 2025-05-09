@@ -195,7 +195,6 @@ footer,.c{
 
   <div class="button-group">
     <a href="{{ url_for('list_expenses') }}" class="filter-btn">(All)</a>
-    <a href="{{ url_for('list_expenses') }}" class="filter-btn"> Sort by Id </a>
     <a href="{{ url_for('list_expenses', sort='amount') }}" class="filter-btn">Sort by Amount</a>
     <a href="{{ url_for('list_expenses', sort='date') }}" class="filter-btn">Sort by Date</a>
     <a href="{{ url_for('list_expenses', sort='category') }}" class="filter-btn">Sort by Category</a>
@@ -223,18 +222,10 @@ footer,.c{
           <td>{{ expense.id }}</td>
           <td>${{ '%.2f' | format(expense.amount) }}</td>
           <td>
-<<<<<<< HEAD
-            <a href="{{ url_for('expenses_by_category', category_id=expense.category.id) }}" class="filter-btn">
-              {{ expense.category.name }}
-            </a>
-          </td>
-          
-=======
             <a href="{{ url_for('expenses_by_category', category_id=expense.category.id) }}">
               {{ expense.category.name }}
             </a>
           </td>
->>>>>>> bdf1068fc63be71df270c07f883dc07dee56b262
           <td>{{ expense.date.strftime('%Y-%m-%d') }}</td>
           <td>{{ expense.note }}</td>
           <td>
