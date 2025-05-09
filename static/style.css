@@ -96,6 +96,7 @@ h1, h2, h3 {
     color: #fff;
     padding: 0.5rem 1rem;
     border: none;
+    border-radius: 20px;
     font-size: 0.95rem;
     text-decoration: none;
     cursor: pointer;
@@ -195,6 +196,7 @@ tr:hover {
 
     .btn {
         font-size: 0.95rem;
+        border-radius: 20px;
     }
 
     table {
@@ -216,6 +218,7 @@ tr:hover {
     padding: 0.5rem 1rem;
     margin-top: 0.5rem;
     border: none;
+    border-radius: 20px;
     font-size: 0.95rem;
     text-decoration: none;
     cursor: pointer;
