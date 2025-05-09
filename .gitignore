@@ -1,0 +1,16 @@
+# Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environment
+venv/
+
+# SQLite database
+store.db
+
+# Pytest cache
+.pytest_cache/
+
+# dotenv files (if you use them)
+.env
