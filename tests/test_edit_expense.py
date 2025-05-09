@@ -63,7 +63,7 @@ def test_edit_expense_post(client, app):
 
     # The request should redirect to the expenses list
     assert response.status_code == 200
-    assert b"All Expenses" in response.data # Basic confirmation page loaded
+    assert b"The Ledger" in response.data # Basic confirmation page loaded
 
     # Confirms that the database was actually updated
     with app.app_context():
