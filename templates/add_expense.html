@@ -17,7 +17,7 @@
                 <label>Category:</label><br>
                 <select name="category_id" required class="input-box">
                     {% for category in categories %}
-                        <option value="{{ category.id }}"{{ category.name }}</option>
+                        <option value="{{ category.id }}"> {{ category.name }}</option>
                     {% endfor %}
                 </select>
             </div>
