@@ -99,10 +99,15 @@ def create_app(test_config=None):
         if not expense:
             return render_template("error.html", message="No expense matching the ID")
         
+        
         amount = float(request.form["amount"])
         category_id = int(request.form["category_id"])
         date = datetime.strptime(request.form["date"], "%Y-%m-%d").date()
         note = request.form["note"]
+
+        if amount < 0:
+            return render_template("error.html", message="Cannot add a negative amount!")
+
         
         today = datetime.today().date()
         if date > today:

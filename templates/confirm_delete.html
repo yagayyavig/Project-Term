@@ -14,7 +14,7 @@
         <ul style="margin: 1rem 0; padding-left: 0.5rem; font-size:large">
             <li><strong>Id:</strong> {{ expense.id }}</li>
             <li><strong>Amount:</strong> ${{ expense.amount }}</li>
-            <li><strong>Category:</strong> {{ expense.category }}</li>
+            <li><strong>Category:</strong> {{ expense.category.name }}</li>
             <li><strong>Date:</strong> {{ expense.date }}</li>
             <li><strong>Note:</strong> {{ expense.note }}</li>
         </ul>

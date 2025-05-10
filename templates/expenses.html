@@ -86,6 +86,30 @@
     overflow: hidden;
   }
 
+  td a {
+  padding: 0.4rem 1rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(6px);
+  display: inline-block;
+}
+
+td a:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  color: black;
+  border-color: white;
+  transform: scale(1.05);
+}
+
+
   th, td {
     padding: 1rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.15);
@@ -199,11 +223,10 @@ footer,.c{
           <td>{{ expense.id }}</td>
           <td>${{ '%.2f' | format(expense.amount) }}</td>
           <td>
-            <a href="{{ url_for('expenses_by_category', category_id=expense.category.id) }}" class="filter-btn">
+            <a href="{{ url_for('expenses_by_category', category_id=expense.category.id) }}">
               {{ expense.category.name }}
             </a>
           </td>
-          
           <td>{{ expense.date.strftime('%Y-%m-%d') }}</td>
           <td>{{ expense.note }}</td>
           <td>
