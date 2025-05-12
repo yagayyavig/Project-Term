@@ -1,0 +1,27 @@
+name: Test Python Application
+
+on:
+  push:
+    branches: [ "main" ]  # Trigger on merge to main
+
+jobs:
+  on-merge:
+    runs-on: ubuntu-latest  # Use a valid GitHub runner
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'  # or your required version
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run tests
+        run: |
+          pytest
