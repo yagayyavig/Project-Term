@@ -55,3 +55,15 @@ def test_negative_amount(client, app):
 
         assert response.status_code == 200
         assert b"Cannot add a negative amount" in response.data
+
+def test_edge_case_1(client, app):
+    with app.app_context():
+        category = create_category("Travel")
+        today = datetime.today().strftime("%Y-%m-%d")
+
+        response = client.post("/expense/add", data= {
+            "amount": "1000000000000000000",
+            "category_id": str(category.id),
+            "date": today,
+            "note": "Test lunch"
+        }, follow_redirects=True )
