@@ -18,7 +18,7 @@
     filter: blur(4px);
     transform: scale(1.05);
   }
-  
+
 
   body {
     margin: 0;
@@ -28,8 +28,6 @@
     font-family: 'Playfair Display', serif;
     text-align: center;
   }
-
-
 
   h1 {
     letter-spacing: 0.2em;
@@ -55,9 +53,10 @@
     margin-bottom: 2rem;
   }
 
-  .filter-btn, .btn {
+  .filter-btn,
+  .btn {
     padding: 0.6rem 1.4rem;
-    background-color: rgba(255, 255, 255, 0.1);git pull origin main
+    background-color: rgba(255, 255, 255, 0.1);
     color: white;
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 50px;
@@ -70,7 +69,8 @@
     backdrop-filter: blur(6px);
   }
 
-  .filter-btn:hover, .btn:hover {
+  .filter-btn:hover,
+  .btn:hover {
     background-color: rgba(255, 255, 255, 0.3);
     color: black;
     border-color: white;
@@ -88,30 +88,31 @@
   }
 
   td a {
-  padding: 0.4rem 1rem;
-  background-color: rgba(255, 255, 255, 0.1);
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 50px;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 0.9rem;
-  letter-spacing: 0.05em;
-  transition: all 0.25s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(6px);
-  display: inline-block;
-}
+    padding: 0.4rem 1rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(6px);
+    display: inline-block;
+  }
 
-td a:hover {
-  background-color: rgba(255, 255, 255, 0.3);
-  color: black;
-  border-color: white;
-  transform: scale(1.05);
-}
+  td a:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    color: black;
+    border-color: white;
+    transform: scale(1.05);
+  }
 
 
-  th, td {
+  th,
+  td {
     padding: 1rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   }
@@ -143,12 +144,13 @@ td a:hover {
     align-items: center;
   }
 
-footer,.c{
+  footer,
+  .sl {
     font-family: 'Playfair Display', serif;
-    color:white;
+    color: white;
   }
 
-  nav{
+  nav {
     position: fixed;
     top: 0;
     left: 0;
@@ -164,7 +166,6 @@ footer,.c{
   }
 
   footer {
-   
     bottom: 0;
     left: 0;
     width: 100%;
@@ -175,24 +176,36 @@ footer,.c{
     letter-spacing: 0.1em;
     font-family: 'Playfair Display', serif;
     z-index: 9999;
-}
-
- 
-  
+    position: fixed;
+    bottom: 0;
+    left: 0;
+  }
 </style>
-
-<div class="top-banner" id="banner-text">
+<div class="top-banner" id="banner-text" style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        color: black;
+        text-align: center;
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        letter-spacing: 0.1em;
+        font-family: 'Playfair Display', serif;
+        z-index: 9999;
+    ">
   VAULT CONTENTS — MONITOR YOUR SPENDING ACTIVITY
 </div>
 
 <div class="back-video-wrapper">
   <video autoplay muted loop class="back-video">
-    <source src="{{ url_for('static', filename='e.mp4') }}" type="video/mp4" />
+    <source src="{{ url_for('static', filename='expenses_sl.mp4') }}" type="video/mp4" />
   </video>
 </div>
 
 <div class="center">
-  <h1 class="c">The Ledger</h1>
+  <h1 class="sl">The Ledger</h1>
 
   <div class="button-group">
     <a href="{{ url_for('list_expenses') }}" class="filter-btn">(All)</a>
@@ -207,50 +220,42 @@ footer,.c{
   </div>
 
   {% if expenses %}
-    <table>
-      <thead>
-        <tr>
-          <th class="c">ID</th>
-          <th class="c">Amount</th>
-          <th class="c">Category</th>
-          <th class="c">Date</th>
-          <th class="c">Note</th>
-          <th class="c">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for expense in expenses %}
-        <tr>
-          <td>{{ expense.id }}</td>
-          <td>${{ '%.2f' | format(expense.amount) }}</td>
-          <td>
-<<<<<<< HEAD
-            <a href="{{ url_for('expenses_by_category', category_id=expense.category.id) }}" class="filter-btn">
-              {{ expense.category.name }}
-            </a>
-          </td>
-          
-=======
-            <a href="{{ url_for('expenses_by_category', category_id=expense.category.id) }}">
-              {{ expense.category.name }}
-            </a>
-          </td>
->>>>>>> bda922a3fdd5590e81e4536045b456134ad45913
-          <td>{{ expense.date.strftime('%Y-%m-%d') }}</td>
-          <td>{{ expense.note }}</td>
-          <td>
-            <div class="button">
-              <a href="{{ url_for('edit_form', expense_id=expense.id) }}" class="btn">Edit</a>
-              <br>
-              <a href="{{ url_for('confirm_delete', expense_id=expense.id) }}" class="btn">Delete</a>
-            </div>
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+  <table>
+    <thead>
+      <tr>
+        <th class="c">ID</th>
+        <th class="c">Amount</th>
+        <th class="c">Category</th>
+        <th class="c">Date</th>
+        <th class="c">Note</th>
+        <th class="c">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for expense in expenses %}
+      <tr>
+        <td>{{ expense.id }}</td>
+        <td>${{ '%.2f' | format(expense.amount) }}</td>
+        <td>
+          <a href="{{ url_for('expenses_by_category', category_id=expense.category.id) }}">
+            {{ expense.category.name }}
+          </a>
+        </td>
+        <td>{{ expense.date.strftime('%Y-%m-%d') }}</td>
+        <td>{{ expense.note }}</td>
+        <td>
+          <div class="button">
+            <a href="{{ url_for('edit_form', expense_id=expense.id) }}" class="btn">Edit</a>
+            <br>
+            <a href="{{ url_for('confirm_delete', expense_id=expense.id) }}" class="btn">Delete</a>
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
   {% else %}
-    <p>No expenses found.</p>
+  <p>No expenses found.</p>
   {% endif %}
 </div>
 
