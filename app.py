@@ -61,6 +61,8 @@ def create_app(test_config=None):
         if amount < 0:
             return render_template("error.html", message="Cannot add a negative amount!")
 
+        if amount > 1000000:
+            return render_template("error.html", message="Cannot add the amount you suggested" )
             
         today = datetime.today().date()
         if date > today:
