@@ -3,41 +3,160 @@
 {% block title %}Expenses{% endblock %}
 
 {% block content %}
-<div class="center-box">
-    <div class="card" style="max-width: 900px; font-size: 1.4rem;">
-        <h1 style="text-align: center; font-size: 3rem;">Add New Expense</h1>
-
-        <form method="post" style="display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2rem; ">
-            <div>
-                <label>Amount ($):</label><br>
-                <input type="number" step="0.01" name="amount" required class="input-box">
-            </div>
-
-            <div>
-                <label>Category:</label><br>
-                <select name="category_id" required class="input-box">
-                    {% for category in categories %}
-                        <option value="{{ category.id }}"> {{ category.name }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-
-            <div>
-                <label>Date:</label><br>
-                <input type="date" name="date" required class="input-box" max="{{ today }}">
-            </div>
-
-            <div>
-                <label>Note:</label><br>
-                <input type="text" name="note" class="input-box">
-            </div>
-
-            <button type="submit" class="btn" style="font-size: 19px;">Add Expense</button>
-        </form>
-
-        <div style="margin-top: 1.5rem; text-align: center;">
-            <a href="{{ url_for('list_expenses') }}" class="btn-back">Back to Expenses</a>
-        </div> 
-    </div>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet" />
+<div class="back-video-wrapper">
+    <video autoplay muted loop class="back-video">
+        <source src="{{ url_for('static', filename='expenses_sl.mp4') }}" type="video/mp4">
+    </video>
 </div>
+
+<style>
+    .back-video {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+        object-position: center;
+        transform: scale(1.05);
+        z-index: -1;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: black;
+        color: white;
+        font-family: 'Playfair Display', serif;
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 3rem;
+        margin-top: 5rem;
+        letter-spacing: 0.1em;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        max-width: 500px;
+        margin: 2rem auto 0;
+        padding: 2rem;
+        background-color: rgba(0, 0, 0, 0.4);
+        border-radius: 12px;
+        backdrop-filter: blur(8px);
+    }
+
+    label {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .input-box {
+        width: 100%;
+        padding: 0.8rem 1rem;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        background-color: rgba(255, 255, 255, 0.05);
+        color: white;
+        font-size: 1rem;
+        outline: none;
+        transition: 0.25s ease;
+    }
+
+    .input-box:focus {
+        border-color: white;
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .btn {
+        margin-top: 1rem;
+        padding: 0.8rem 1.5rem;
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: white;
+        background-color: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50px;
+        cursor: pointer;
+        transition: 0.25s ease;
+    }
+
+    .btn:hover {
+        background-color: rgba(255, 255, 255, 0.3);
+        color: black;
+        border-color: white;
+        transform: scale(1.05);
+    }
+
+    .btn-back {
+        margin-top: 2rem;
+        display: inline-block;
+        padding: 0.7rem 1.5rem;
+        background-color: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 1rem;
+        letter-spacing: 0.05em;
+        color: white;
+        transition: 0.25s ease;
+    }
+
+    .btn-back:hover {
+        background-color: rgba(255, 255, 255, 0.3);
+        color: black;
+        border-color: white;
+        transform: scale(1.05);
+    }
+
+    .back-link {
+        text-align: center;
+        margin-top: 2rem;
+    }
+
+    label,
+    button, h1 {
+        font-family: 'Playfair Display', serif;
+    }
+</style>
+
+<h1>NEW ENTRY</h1>
+
+<form method="post">
+    <div>
+        <label>Amount ($):</label><br>
+        <input type="number" step="0.01" name="amount" required class="input-box">
+    </div>
+
+    <div>
+        <label>Category:</label><br>
+        <select name="category_id" required class="input-box">
+            {% for category in categories %}
+            <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div>
+        <label>Date:</label><br>
+        <input type="date" name="date" required class="input-box" max="{{ today }}">
+    </div>
+
+    <div>
+        <label>Note:</label><br>
+        <input type="text" name="note" class="input-box">
+    </div>
+
+    <button type="submit" class="btn">Add Expense</button>
+</form>
+
+<div class="back-link">
+    <a href="{{ url_for('list_expenses') }}" class="btn-back">Back to The Ledger</a>
+</div>
+
 {% endblock %}
