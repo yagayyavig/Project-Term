@@ -2,7 +2,7 @@ name: Test Python Application
 
 on:
   push:
-    branches: [ "main" ]  # Trigger on merge to main
+    branches: "**"  # Trigger on merge to main
 
 jobs:
   on-merge:

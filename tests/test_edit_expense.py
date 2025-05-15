@@ -1,8 +1,16 @@
 from db import db
 from models.expense import Expense
 from models.category import Category
-from datetime import datetime
+from datetime import datetime, timedelta
 from sqlalchemy import select
+
+
+
+def create_category(name="Test"):
+    category = Category(name=name)
+    db.session.add(category)
+    db.session.commit()
+    return category
 
 # Test the GET method for editing an expense
 def test_edit_expense_get(client, app):
