@@ -14,3 +14,5 @@ store.db
 
 # dotenv files (if you use them)
 .env
+.coverage
+htmlcov/
