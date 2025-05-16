@@ -55,3 +55,20 @@ def test_negative_amount(client, app):
 
         assert response.status_code == 200
         assert b"Cannot add a negative amount" in response.data
+
+def test_add_expense_large_amount(client, app):
+    with app.app_context():
+        category = create_category("TooMuch")
+        cat_id = category.id  # ✅ store it before leaving app context
+        today = datetime.today().strftime("%Y-%m-%d")
+
+    response = client.post("/expenses/add", data={
+        "amount": "1000001",
+        "category_id": str(cat_id),
+        "date": today,
+        "note": "Over limit"
+    }, follow_redirects=True)
+
+    assert response.status_code == 200
+    assert b"Cannot add the amount you suggested" in response.data
+

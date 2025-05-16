@@ -1,11 +1,13 @@
 # Project Term - Budget Tracker
+
 ## Yagayya Vig, Shrey Dhand, Luis Morin, Samantha Lum & Nick Fiebelkorn
-changes
+
 ---
 
-# Project Term - Expense Tracker
+## Project Term - Expense Tracker
 
 ## Team Members
+
 - Yagayya Vig
 - Shrey Dhand
 - Luis Morin
@@ -31,7 +33,7 @@ Sprint 2 builds on that by adding front-end features, better UX, and category fi
 **Main Goal:**  
 Create the Minimum Viable Product (MVP) that supports basic expense management with a working backend, database connection, and simple front-end structure.
 
-### Features Completed in Sprint 1:
+### Features Completed in Sprint 1
 
 - Flask app setup (`app.py`)
 - SQLite database integration with SQLAlchemy 2.0
@@ -55,7 +57,7 @@ Create the Minimum Viable Product (MVP) that supports basic expense management w
 **Main Goal:**  
 Enhance functionality and design by implementing sorting, editing, deleting, and filtering by category.
 
-### Features Completed in Sprint 2:
+### Features Completed in Sprint 2
 
 - `add_expense.html` and `edit_expense.html` templates finalized
 - `expenses.html` implemented with table view of all expenses
