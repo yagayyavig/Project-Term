@@ -81,3 +81,83 @@ def test_edit_expense_post(client, app):
         assert updated.category.name == "Dining Out 🍽️"
         assert updated.date == datetime(2025, 1, 5).date()
         assert updated.note == "updated note"
+
+def test_edit_expense_future_date(client, app):
+    with app.app_context():
+        category = Category(name="Test FD")
+        db.session.add(category)
+        db.session.commit()
+
+        category_id = category.id
+
+        expense = Expense(amount=20.0, category=category, date=datetime(2025, 1, 1).date(), note="hello")
+        db.session.add(expense)
+        db.session.commit()
+        expense_id =expense.id
+
+    future_date = (datetime.today() + timedelta(days=10)).strftime("%Y-%m-%d")
+
+    response = client.post(f"/expenses/edit/{expense_id}", data={
+        "amount": "50",
+        "category_id": str(category_id),
+        "date": future_date,
+        "note": "Updated expense"
+    })
+
+    assert response.status_code == 200
+    print(response.data.decode())
+    assert b"Cannot set a future date for the expense" in response.data
+
+def test_edit_expense_negative_amount(client, app):
+    with app.app_context():
+        category = Category(name="Test Category")
+        db.session.add(category)
+        db.session.commit()
+        category_id = category.id
+
+        expense = Expense(
+            amount=100.0,
+            category_id=category_id,
+            date=datetime(2025, 1, 1).date(),
+            note="Initial"
+        )
+        db.session.add(expense)
+        db.session.commit()
+        expense_id = expense.id
+
+    response = client.post(f"/expenses/edit/{expense_id}", data={
+        "amount": "-123.45",
+        "category_id": str(category_id),
+        "date": "2025-01-02",
+        "note": "Trying negative"
+    })
+
+    assert response.status_code == 200
+    assert b"Cannot add a negative amount!" in response.data
+
+def test_edit_expense_max_amount(client, app):
+    with app.app_context():
+        category = Category(name="High Roller")
+        db.session.add(category)
+        db.session.commit()
+        category_id = category.id
+
+        expense = Expense(
+            amount=100.0,
+            category_id=category_id,
+            date=datetime(2025, 1, 1).date(),
+            note="Initial"
+        )
+        db.session.add(expense)
+        db.session.commit()
+        expense_id = expense.id
+
+    response = client.post(f"/expenses/edit/{expense_id}", data={
+        "amount": "1000001",  # Just over the max limit
+        "category_id": str(category_id),
+        "date": "2025-01-02",
+        "note": "Trying to go big"
+    })
+
+    assert response.status_code == 200
+    assert b"Cannot add the amount you suggested" in response.data
