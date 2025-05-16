@@ -161,3 +161,33 @@ def test_edit_expense_max_amount(client, app):
 
     assert response.status_code == 200
     assert b"Cannot add the amount you suggested" in response.data
+
+def test_edit_expense_invalid_category(client, app):
+    with app.app_context():
+        category = Category(name="Something")
+        db.session.add(category)
+        db.session.commit()
+
+        expense = Expense(
+            amount=100.0,
+            category=category,
+            date=datetime(2025, 1, 1).date(),
+            note="Init"
+        )
+        db.session.add(expense)
+        db.session.commit()
+        expense_id = expense.id
+
+    response = client.post(f"/expenses/edit/{expense_id}", data={
+        "amount": "100",
+        "category_id": "99999",  # Non-existent category ID
+        "date": "2025-01-02",
+        "note": "Invalid cat test"
+    })
+
+    assert response.status_code == 200
+    assert b"Invalid category selected" in response.data
+
+def test_edit_form_invalid_expense(client):
+    response = client.get("/expenses/edit/99999")
+    assert b"No expense matching the ID" in response.data

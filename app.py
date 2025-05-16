@@ -184,7 +184,7 @@ def create_app(test_config=None):
     
     return app
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     app = create_app()
     with app.app_context():
         from models import expense, category
@@ -192,27 +192,18 @@ if __name__ == "__main__":
 
         # Create Default Categories
         default_categories = [
-        "Dining Out 🍽️",
-        "Education 🎓",
-        "Entertainment 🎬",
-        "Gas ⛽",
-        "Groceries 🛒",
-        "Health & Medical 💊",
-        "Internet & Phone 📶",
-        "Personal Care 🧴",
-        "Rent 🏠",
-        "Transport 🚌",
-        "Utilities 💡",
-        "Other 📁"
-    ]
+            "Dining Out 🍽️", "Education 🎓", "Entertainment 🎬", "Gas ⛽",
+            "Groceries 🛒", "Health & Medical 💊", "Internet & Phone 📶",
+            "Personal Care 🧴", "Rent 🏠", "Transport 🚌", "Utilities 💡", "Other 📁"
+        ]
 
         for name in default_categories:
             exists = db.session.execute(
                 select(Category).where(Category.name == name)
             ).scalars().first()
-
             if not exists:
                 db.session.add(Category(name=name))
         db.session.commit()
-        
+
     app.run(debug=True, port=8002)
+
