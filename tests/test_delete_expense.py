@@ -67,3 +67,7 @@ def test_delete_error(client):
     # make sure you get an error
     assert response.status_code == 404 or b"Error" in response.data
 
+def test_confirm_delete_invalid_expense(client):
+    response = client.get("/expenses/999999/deleteconfirm")
+    assert response.status_code == 200
+    assert b"No expense matching the ID" in response.data
