@@ -182,7 +182,8 @@ def create_app(test_config=None):
 
     return app
 
-def create_tables(app):
+if __name__ == "__main__":  # pragma: no cover
+    app = create_app()
     with app.app_context():
         from models import expense, category
         db.create_all()
@@ -202,8 +203,5 @@ def create_tables(app):
                 db.session.add(Category(name=name))
         db.session.commit()
 
-
-if __name__ == "__main__":  # Local dev only
-    app = create_app()
-    create_tables(app)
     app.run(debug=True, port=8002)
+
