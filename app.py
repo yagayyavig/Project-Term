@@ -180,30 +180,29 @@ def create_app(test_config=None):
         expenses = db.session.execute(stmt).scalars().all()
         return render_template("expenses_by_category.html", expenses=expenses, category=category)
 
-
-    
     return app
 
-if __name__ == "__main__":  # pragma: no cover
-    app = create_app()
-    with app.app_context():
-        from models import expense, category
-        db.create_all()
+def create_tables(app):
+    if __name__ == "__main__":  # pragma: no cover
+        app = create_app()
+        with app.app_context():
+            from models import expense, category
+            db.create_all()
 
-        # Create Default Categories
-        default_categories = [
-            "Dining Out 🍽️", "Education 🎓", "Entertainment 🎬", "Gas ⛽",
-            "Groceries 🛒", "Health & Medical 💊", "Internet & Phone 📶",
-            "Personal Care 🧴", "Rent 🏠", "Transport 🚌", "Utilities 💡", "Other 📁"
-        ]
+            # Create Default Categories
+            default_categories = [
+                "Dining Out 🍽️", "Education 🎓", "Entertainment 🎬", "Gas ⛽",
+                "Groceries 🛒", "Health & Medical 💊", "Internet & Phone 📶",
+                "Personal Care 🧴", "Rent 🏠", "Transport 🚌", "Utilities 💡", "Other 📁"
+            ]
 
-        for name in default_categories:
-            exists = db.session.execute(
-                select(Category).where(Category.name == name)
-            ).scalars().first()
-            if not exists:
-                db.session.add(Category(name=name))
-        db.session.commit()
+            for name in default_categories:
+                exists = db.session.execute(
+                    select(Category).where(Category.name == name)
+                ).scalars().first()
+                if not exists:
+                    db.session.add(Category(name=name))
+            db.session.commit()
 
-    app.run(debug=True, port=8002)
+        app.run(debug=True, port=8002)
 
